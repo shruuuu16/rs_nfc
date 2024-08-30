@@ -1,0 +1,27 @@
+import pickle
+import numpy as np
+
+# Assuming you've already calculated the cosine_sim matrix
+import numpy as np
+
+def cosine_sim(vec1, vec2):
+    dot_product = np.dot(vec1, vec2)
+    norm_vec1 = np.linalg.norm(vec1)
+    norm_vec2 = np.linalg.norm(vec2)
+    return dot_product / (norm_vec1 * norm_vec2)
+
+cosine_sim = np.array(cosine_sim)  # Ensure it's a numpy array
+
+# Save the cosine similarity matrix using pickle in binary mode
+with open('cosine_sim.pkl', 'wb') as f:
+    pickle.dump(cosine_sim, f, protocol=pickle.HIGHEST_PROTOCOL)
+
+print("Cosine similarity matrix saved as 'cosine_sim.pkl'")
+
+# To verify, let's try to load the file
+try:
+    with open('cosine_sim.pkl', 'rb') as f:
+        loaded_cosine_sim = pickle.load(f)
+    print("Successfully loaded the pickle file. Shape:", loaded_cosine_sim.shape)
+except Exception as e:
+    print("Error loading the pickle file:", str(e))
